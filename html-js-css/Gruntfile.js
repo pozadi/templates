@@ -2,20 +2,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    coffee: {
-      main: {
-        options: {
-          bare: true
-        },
-        expand: true,
-        flatten: false,
-        cwd: 'src/javascript',
-        src: '**/*.coffee',
-        dest: 'public/javascript',
-        ext: '.js'
-      }
-    },
-
     copy: {
       js: {
         expand: true,
@@ -47,7 +33,7 @@ module.exports = function(grunt) {
           'public/stylesheets/all.css': [
             'public/stylesheets/vendor/normalize.css',
             'public/stylesheets/vendor/html5bp-intro.css',
-            'public/stylesheets/main.css',
+            'public/stylesheets/main.prefixed.css',
             'public/stylesheets/vendor/html5bp-outro.css'
           ]
         }
@@ -61,14 +47,6 @@ module.exports = function(grunt) {
       main: {
         files: {
           'public/javascript/all.min.js': 'public/javascript/all.js'
-        }
-      }
-    },
-
-    less: {
-      main: {
-        files: {
-          'public/stylesheets/main.unprefixed.css': 'src/stylesheets/less/main.less'
         }
       }
     },
@@ -87,32 +65,14 @@ module.exports = function(grunt) {
     },
 
     autoprefixer: {
-      options: {
-        browsers: ['> 1%', 'last 2 version', 'ie 8']
-      },
       main: {
         files: {
-          'public/stylesheets/main.css': 'public/stylesheets/main.unprefixed.css'
-        }
-      }
-    },
-
-    jade: {
-      main: {
-        options: {
-          pretty: true
-        },
-        files: {
-          "public/index.html": "src/templates/index.jade"
+          'public/stylesheets/main.prefixed.css': 'public/stylesheets/main.css'
         }
       }
     },
 
     watch: {
-      jade: {
-        files: 'src/templates/**',
-        tasks: ['jade']
-      },
       javascript: {
         files: 'src/javascript/**',
         tasks: ['js']
@@ -125,19 +85,16 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('js', ['coffee', 'copy:js', 'concat:js', 'uglify']);
-  grunt.registerTask('css', ['copy:css', 'less', 'autoprefixer', 'concat:css', 'cssmin']);
-  grunt.registerTask('default', ['jade', 'js', 'css']);
+  grunt.registerTask('js', ['copy:js', 'concat:js', 'uglify']);
+  grunt.registerTask('css', ['copy:css', 'autoprefixer', 'concat:css', 'cssmin']);
+  grunt.registerTask('default', ['js', 'css']);
 
 
 };
