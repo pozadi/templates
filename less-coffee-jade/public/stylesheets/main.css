@@ -1,0 +1,5 @@
+.some-block {
+  color: red;
+  -webkit-transition: width 1s;
+  transition: width 1s;
+}
