@@ -165,12 +165,11 @@
               # Simple js modules system https://gist.github.com/pozadi/8973106
               # (helps don't care about files order)
               banner: """
-                window.ns=function(){var a,c,d,e,f,b=function(a,b)
-                {for(var c=0;c<a.length;c++)if(c in a&&a[c]===b)return c;return-1};
-                return e={},c={},d=[],a=function(a,g){
-                return g?e[a]=g:(b(d,a)<0&&(f={exports:{}},e[a](f.exports,f),
-                c[a]=f.exports,d.push(a)),c[a])},a.initAll=function(){
-                for(var a in e)e.hasOwnProperty(a)&&ns(a)},a}();
+                window.ns=function(){var a,b,c,d,e,f;return d={},b={},c=[],
+                a=function(a,b){for(var c=0;c<a.length;c++)if(c in a&&a[c]===b)
+                return c;return-1},e=function(e,g){return g?d[e]=g:(a(c,e)<0&&
+                (f={exports:{}},d[e](f.exports,f),b[e]=f.exports,c.push(e)),b[e])},
+                e.initAll=function(){for(var a in d)d.hasOwnProperty(a)&&e(a)},e}();
               """
               footer: ";ns.initAll();"
             files:
