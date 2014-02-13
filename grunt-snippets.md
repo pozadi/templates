@@ -150,6 +150,42 @@
             src: "**"
             dest: "public"
             
+       
+## Concatenate js   
+
+1. Install plugin
+
+        npm install grunt-contrib-concat --save-dev
+        
+2. Add to `initConfig()`
+            
+        concat:
+          js:
+            options:
+              # Simple js modules system https://gist.github.com/pozadi/8973106
+              # (helps don't care about files order)
+              banner: """
+                window.ns=function(){var a,c,d,e,f,b=function(a,b)
+                {for(var c=0;c<a.length;c++)if(c in a&&a[c]===b)return c;return-1};
+                return e={},c={},d=[],a=function(a,g){
+                return g?e[a]=g:(b(d,a)<0&&(f={exports:{}},e[a](f.exports,f),
+                c[a]=f.exports,d.push(a)),c[a])},a.initAll=function(){
+                for(var a in e)e.hasOwnProperty(a)&&ns(a)},a}();
+              """
+              footer: ";ns.initAll();"
+            files:
+              "public/javascript/desktop.js": [
+                "tmp/javascript/vendor/jquery.js",
+                "tmp/javascript/vendor/*.js",
+                "tmp/javascript/common-modules/*.js",
+                "tmp/javascript/desktop-modules/*.js"
+              ],
+              "public/javascript/mobile.js": [
+                "tmp/javascript/vendor/jquery.js",
+                "tmp/javascript/vendor/*.js",
+                "tmp/javascript/common-modules/*.js",
+                "tmp/javascript/mobile-modules/*.js"
+              ]
             
             
 ## Compile Jade templates file to file, but not recursively
