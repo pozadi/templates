@@ -25,6 +25,26 @@
       
 # Snippets
 
+## Compile CoffeeScript file to file
+
+1. Install plugin
+
+        npm install grunt-contrib-coffee --save-dev
+
+
+2. Add to `initConfig()`
+
+        coffee:
+          main:
+            options:
+              bare: true
+            expand: true
+            flatten: false
+            cwd: "src/javascript"
+            src: "**/*.coffee"
+            dest: "tmp/javascript"
+            ext: ".js"
+
 
 
     
