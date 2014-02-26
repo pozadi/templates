@@ -3,26 +3,26 @@
 1. Create `package.json` to hold npm dependencies
 
         npm init
-    
+
 2. Install some inital dependencies
 
         npm install coffee-script --save-dev
         npm install grunt --save-dev
         npm install load-grunt-tasks --save-dev
-    
+
 2. Create `Gruntfile.coffee` with following content
 
         module.exports = (grunt) ->
 
           grunt.initConfig(
-          
+
           )
-        
+
           require("load-grunt-tasks")(grunt)
 
           grunt.registerTask "default", []
-      
-      
+
+
 # Snippets
 
 ## Compile CoffeeScript file to file
@@ -44,9 +44,9 @@
             src: "**/*.coffee"
             dest: "tmp/javascript"
             ext: ".js"
-            
-            
-            
+
+
+
 ## Compile Stylus file to file, but not recursively
 
 1. Install plugin
@@ -66,9 +66,9 @@
             src: "*.styl"
             dest: "tmp/stylesheets-unprefixed"
             ext: ".css"
-            
-            
-            
+
+
+
 ## Compile LESS file to file, but not recursively
 
 1. Install plugin
@@ -85,10 +85,10 @@
             src: "*.less"
             dest: "tmp/stylesheets-unprefixed"
             ext: ".css"
-            
-            
-            
-            
+
+
+
+
 ## Add vendor prefixes with Autoprefixer
 
 1. Install plugin
@@ -105,7 +105,7 @@
             src: "*.css"
             dest: "tmp/stylesheets"
             ext: ".css"
-            
+
 
 
 ## Copy js/css that not need to be compiled (file to file)
@@ -130,8 +130,8 @@
             cwd: "src/stylesheets"
             src: "**/*.css"
             dest: "tmp/stylesheets"
-            
-            
+
+
 
 ## Copy some other files
 
@@ -149,27 +149,26 @@
             cwd: "src/copy-to-public"
             src: "**"
             dest: "public"
-            
-       
-## Concatenate js   
+
+
+## Concatenate js
 
 1. Install plugin
 
         npm install grunt-contrib-concat --save-dev
-        
+
 2. Add to `initConfig()`
-            
+
         concat:
           js:
             options:
               # Simple js modules system https://gist.github.com/pozadi/8973106
               # (helps don't care about files order)
               banner: """
-                window.ns=function(){var a,b,c,d,e,f;return d={},b={},c=[],
-                a=function(a,b){for(var c=0;c<a.length;c++)if(c in a&&a[c]===b)
-                return c;return-1},e=function(e,g){return g?d[e]=g:(a(c,e)<0&&
-                (f={exports:{}},d[e](f.exports,f),b[e]=f.exports,c.push(e)),b[e])},
-                e.initAll=function(){for(var a in d)d.hasOwnProperty(a)&&e(a)},e}();
+                window.ns=function(){function b(b,c){return c?a[b]=function(){
+                var d={exports:{}};return c(d.exports,d),a[b]=function(){
+                return d.exports},d.exports}:a[b]()}var a={};return b.initAll=
+                function(){for(var b in a)a.hasOwnProperty(b)&&a[b]()},b}();
               """
               footer: ";ns.initAll();"
             files:
@@ -185,8 +184,8 @@
                 "tmp/javascript/common-modules/*.js",
                 "tmp/javascript/mobile-modules/*.js"
               ]
-            
-            
+
+
 ## Compile Jade templates file to file, but not recursively
 
 1. Install plugin
@@ -245,5 +244,5 @@
               keepalive: true
 
 
-    
-    
+
+
